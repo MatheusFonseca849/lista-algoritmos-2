@@ -13,7 +13,7 @@ const positiveOrNegative = () => {
     resetResults()
     let totalNumbers = Number(prompt("Quantos números serão avaliados"))
 
-    for( let i = 0 ; i <= totalNumbers ; i++ ){
+    for( let i = 0 ; i < totalNumbers ; i++ ){
         let number = Number(prompt("Digite um número"))
         if(number > 0){
             alert("Número positivo")
@@ -167,6 +167,14 @@ const calculateDiscount = () => {
         switch(select.value){
             case "gas":
             results.innerHTML = Number(valueInput.value) * 0.79
+            break;
+
+            case "alcohol":
+            results.innerHTML = Number(valueInput.value) * 0.75
+            break;
+
+            case "diesel":
+            results.innerHTML = Number(valueInput.value) * 0.86
         }
     })
 
@@ -176,25 +184,121 @@ const calculateDiscount = () => {
 
 }
 
+const wageRaise = () => {
+    resetResults()
+    let template = createTemplate()
+    let employees = []
+
+    let minimumWage = Number(prompt("Digite o valor do salário mínimo"))
+
+    const display = document.getElementById("display")
+
+    let output = document.createElement("div")
+
+    let employeeList = document.createElement("div")
+
+    const form = document.createElement("form")
+
+    const nameLabel = document.createElement("label")
+    nameLabel.innerHTML = "Nome:"
+    const nameInput = document.createElement("input")
+    nameLabel.append(nameInput)
+
+    const salaryLabel = document.createElement("label")
+    salaryLabel.innerHTML = "Salário:"
+    const salaryInput = document.createElement("input")
+    salaryInput.type = "number"
+    salaryInput.step = "any"
+    salaryLabel.append(salaryInput)
+
+    let btn = document.createElement("button")
+    btn.classList = "formBtn"
+    btn.innerHTML = "Adicionar"
+    btn.addEventListener("click", (e) => {
+        e.preventDefault()
+        let name = nameInput.value
+        let oldSalary = Number(salaryInput.value)
+        
+        let newSalary
+        if(oldSalary < 3 * minimumWage){
+            newSalary = Number(oldSalary * 1.5)
+            console.log("caiu no primeiro if")
+        }else if( oldSalary >= 3 * minimumWage && oldSalary < 10 *minimumWage){
+            newSalary = Number(oldSalary * 1.2)
+            console.log("caiu no segundo if")
+        }else if( oldSalary >= 10 * minimumWage && oldSalary < 20 *minimumWage){
+            newSalary = Number(oldSalary * 1.15)
+            console.log("caiu no terceiro if")
+        }else{
+            newSalary = Number(oldSalary * 1.1)
+            console.log("caiu no último if")
+        }
+        
+        let employee = {
+            name: name,
+            salary: oldSalary,
+            adjustedSalary: Number(newSalary)
+        }
+        
+        employees.push(employee)
+        let p = document.createElement("p")
+        p.innerHTML = `Nome: ${employee.name}/ Salário: R\$ ${employee.salary}/ Reajuste: R\$ ${(employee.adjustedSalary - employee.salary).toFixed(2)}/ Novo salário: R\$ ${employee.adjustedSalary.toFixed(2)}`
+        
+        employeeList.append(p)
+    })
+
+    let calculateBtn = document.createElement("button")
+    calculateBtn.innerHTML = "Calcular"
+    calculateBtn.classList = "formBtn"
+    calculateBtn.addEventListener("click", () => {
+        let previousPayroll = 0
+        let finalPayroll = 0
+        employees.forEach((employee) => {
+            previousPayroll = previousPayroll + employee.salary
+            finalPayroll = finalPayroll + employee.adjustedSalary
+        })
+        
+        
+        let difference = finalPayroll - previousPayroll
+        
+        let p = document.createElement("p")
+        p.innerHTML = `O acrécimo à folha de pagamento é de R$ ${difference.toFixed(2)}`
+        output.append(p)
+    })
+
+    form.append(nameLabel, salaryLabel, btn)
+    template.append(form, employeeList, calculateBtn, output)
+
+    display.append(template)
+
+}
+
+
+
 const addEventListeners = () => {
-    const btn1 = document.getElementById("1")
-    btn1.addEventListener("click", () => {
+    const btn24 = document.getElementById("24")
+    btn24.addEventListener("click", () => {
         positiveOrNegative()
     })
 
-    const btn2 = document.getElementById("2")
-    btn2.addEventListener("click", () => {
+    const btn25 = document.getElementById("25")
+    btn25.addEventListener("click", () => {
         numbersAreEqual()
     })
 
-    const btn3 = document.getElementById("3")
-    btn3.addEventListener("click", () => {
+    const btn26 = document.getElementById("26")
+    btn26.addEventListener("click", () => {
         writeNumbers()
     })
 
-    const btn4 = document.getElementById("4")
-    btn4.addEventListener("click", () => {
+    const btn27 = document.getElementById("27")
+    btn27.addEventListener("click", () => {
         calculateDiscount()
+    })
+
+    const btn28 = document.getElementById("28")
+    btn28.addEventListener("click", () => {
+        wageRaise()
     })
 }
 
