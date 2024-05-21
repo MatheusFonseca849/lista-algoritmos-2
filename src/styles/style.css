@@ -4,6 +4,7 @@ body {
     background: rgb(0, 0, 0);
     background: linear-gradient(118deg, rgba(0, 0, 0, 1) 0%, rgba(121, 9, 45, 1) 22%, rgba(255, 136, 0, 1) 100%);
     color: #FFF;
+    overflow-y: hidden;
 }
 
 main {
@@ -62,6 +63,7 @@ aside ul {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    overflow-y: auto;
 }
 
 li button {

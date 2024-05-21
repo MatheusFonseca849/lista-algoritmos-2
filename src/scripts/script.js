@@ -273,7 +273,276 @@ const wageRaise = () => {
 
 }
 
+const showMonthName = () => {
+    resetResults()
+    let display = document.getElementById("display")
+    let template = createTemplate()
+    let results = document.createElement("div")
 
+    let form = document.createElement("form")
+    let monthLabel = document.createElement("label")
+    monthLabel.innerHTML = "Digite um número de 1 a 12"
+    let monthInput = document.createElement("input")
+    monthInput.type = "number"
+    monthInput.max = 12
+    monthInput.min = 1
+
+    let btn = document.createElement("button")
+    btn.innerHTML = "Nome do mês"
+    btn.classList = "formBtn"
+    btn.addEventListener("click", (e) => {
+        e.preventDefault()
+        let p = document.createElement("p")
+
+        switch(monthInput.value){
+            case "1":
+            p.innerHTML = "Janeiro"
+            break;
+
+            case "2":
+            p.innerHTML = "Fevereiro"
+            break;
+
+            case "3":
+            p.innerHTML = "Março"
+            break;
+
+            case "4":
+            p.innerHTML = "Abril"
+            break;
+
+            case "5":
+            p.innerHTML = "Maio"
+            break;
+
+            case "6":
+            p.innerHTML = "Junho"
+            break;
+
+            case "7":
+            p.innerHTML = "Julho"
+            break;
+
+            case "8":
+            p.innerHTML = "Agosto"
+            break;
+
+            case "9":
+            p.innerHTML = "Setembro"
+            break;
+
+            case "10":
+            p.innerHTML = "Outubro"
+            break;
+
+            case "11":
+            p.innerHTML = "Novembro"
+            break;
+
+            case "12":
+            p.innerHTML = "Dezenbro"
+            break;
+
+            default:
+            p.innerHTML = "Mês inválido!"
+        }
+
+        results.append(p)
+    })
+
+    monthLabel.append(monthInput)
+    form.append(monthLabel, btn)
+    template.append(form, results)
+    display.append(template)
+}
+
+const salaryCalculator = () => {
+    resetResults()
+
+    let display = document.getElementById("display")
+    let template = createTemplate()
+    let results = document.createElement("div")
+    
+    let form = document.createElement("form")
+
+    let nameLabel = document.createElement("label")
+    nameLabel.innerHTML = "Nome:"
+    
+    let nameInput = document.createElement("input")
+    nameLabel.append(nameInput)
+
+    let ageLabel = document.createElement("label")
+    ageLabel.innerHTML = "Digite a idade:"
+
+    let ageInput = document.createElement("input")
+    ageInput.type = "number"
+
+    ageLabel.append(ageInput)
+
+    let salaryLabel = document.createElement("label")
+    salaryLabel.innerHTML = "Salário:"
+
+    let salaryInput = document.createElement("input")
+    salaryInput.type = "number"
+    salaryInput.step = "any"
+
+    salaryLabel.append(salaryInput)
+
+    let selectLabel = document.createElement("label")
+    selectLabel.innerHTML = "Selecione o gênero:"
+
+    let genderInput = document.createElement("select")
+
+    let optionMale = document.createElement("option")
+    optionMale.innerHTML = "Masculino"
+    optionMale.value = "M"
+
+    let optionFemale = document.createElement("option")
+    optionFemale.innerHTML = "Feminino"
+    optionFemale.value = "F"
+
+    genderInput.append(optionFemale, optionMale)
+    selectLabel.append(genderInput)
+
+    let btn = document.createElement("button")
+    btn.classList = "formBtn"
+    btn.innerHTML = "Calcular"
+    btn.addEventListener("click", (e) => {
+        e.preventDefault()
+        let p = document.createElement("p")
+
+        let deduction = 0
+
+        if(genderInput.value == "M" && ageInput.value >= 30){
+            deduction = 100
+        }else if( genderInput.value == "M" && ageInput.value < 30){
+            deduction = 50
+        }else if(genderInput.value == "F" && ageInput.value >= 30){
+            deduction = 200
+        }else if(genderInput.value == "F" && ageInput.value < 30){
+            deduction = 80
+        }
+        
+        let netSalary = Number(salaryInput.value) - deduction
+
+        p.innerHTML = `O(A) funcionário(a) de nome ${nameInput.value} tem um salário líquido de R$ ${netSalary.toFixed(2)}`
+        
+        results.append(p)
+    })
+
+    form.append(nameLabel, ageLabel, salaryLabel, selectLabel, btn)
+
+    template.append(form, results)
+
+    display.append(template)
+
+}
+
+const sortNumbers = () => {
+    resetResults()
+    let display = document.getElementById("display")
+    let template = createTemplate()
+
+    let numbers = []
+    let number1 = Number(prompt("Digite o primeiro número"))
+    numbers.push(number1)
+    let number2 = Number(prompt("Digite o segundo número"))
+    numbers.push(number2)
+    let number3 = Number(prompt("Digite o terceiro número"))
+    numbers.push(number3)
+
+    let sortedArray = numbers.sort((a,b) => a - b)
+
+    let p = document.createElement("p")
+    sortedArray.forEach(number => p.innerHTML += ` ${number}`)
+    
+    template.append(p)
+    display.append(template)
+
+}
+
+const calculator = () => {
+    resetResults()
+    let display = document.getElementById("display")
+    let template = createTemplate()
+    let results = document.createElement("div")
+
+    let form = document.createElement("form")
+
+    let firstNumberLabel = document.createElement("label")
+    firstNumberLabel.innerHTML = "Primeiro número:"
+
+    let firstNumberInput = document.createElement("input")
+    firstNumberInput.type = "number"
+    firstNumberInput.step = "any"
+
+    firstNumberLabel.append(firstNumberInput)
+
+    let secondNumberLabel = document.createElement("label")
+    secondNumberLabel.innerHTML = "Segundo número:"
+
+    let secondNumberInput = document.createElement("input")
+    secondNumberInput.type = "number"
+    secondNumberInput.step = "any"
+
+    secondNumberLabel.append(secondNumberInput)
+
+    let operatorLabel = document.createElement("label")
+    operatorLabel.innerHTML = "Operador"
+
+    let operatorInput = document.createElement("input")
+
+    operatorLabel.append(operatorInput)
+
+    let btn = document.createElement("button")
+    btn.innerHTML = "Calcular"
+    btn.classList = "formBtn"
+    btn.addEventListener("click", (e) => {
+
+        e.preventDefault()
+
+        let number1 = Number(firstNumberInput.value)
+        let number2 = Number(secondNumberInput.value)
+        let result
+        let p = document.createElement("p")
+
+        switch(operatorInput.value){
+            case "+":
+            result = number1 + number2
+            p.innerHTML = `Resultado: ${result}`
+            break;
+
+            case "-":
+            result = number1 - number2
+            p.innerHTML = `Resultado: ${result}`
+            break;
+
+            case "*":
+            result = number1 * number2
+            p.innerHTML = `Resultado: ${result}`
+            break;
+
+            case "/":
+            result = number1 / number2
+            p.innerHTML = result
+            break;
+
+            default:
+            p.innerHTML = "Valor inválido inserido"
+            
+        }
+
+        results.append(p)
+    })
+
+    form.append(firstNumberLabel, secondNumberLabel, operatorLabel, btn)
+    template.append(form, results)
+    display.append(template)
+}
+
+const triangles = () => {
+
+}
 
 const addEventListeners = () => {
     const btn24 = document.getElementById("24")
@@ -300,6 +569,34 @@ const addEventListeners = () => {
     btn28.addEventListener("click", () => {
         wageRaise()
     })
+
+    const btn29 = document.getElementById("29")
+    btn29.addEventListener("click", () => {
+        showMonthName()
+    })
+
+    const btn30 = document.getElementById("30")
+    btn30.addEventListener("click", () => {
+        salaryCalculator()
+    })
+
+    const btn31 = document.getElementById("31")
+    btn31.addEventListener("click", () => {
+        sortNumbers()
+    })
+
+    const btn32 = document.getElementById("32")
+    btn32.addEventListener("click", () => {
+        calculator()
+    })
 }
 
 addEventListeners()
+
+function ex24(){
+    let display = document.getElementById("display")
+
+    let form = document.createElement("form")
+
+    
+}
