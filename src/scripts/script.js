@@ -31,6 +31,7 @@ const numbersAreEqual = () => {
     let formTemplate = createTemplate()
 
     let form = document.createElement("form")
+    form.classList = "outputForm"
 
     let label1 = document.createElement("label")
     label1.innerHTML = "Primeiro número:"
@@ -70,6 +71,7 @@ const writeNumbers = () => {
     const template = createTemplate()
 
     let form = document.createElement("form")
+    form.classList = "outputForm"
 
     let label = document.createElement("label")
     label.innerHTML = "Insira um número:"
@@ -126,6 +128,7 @@ const calculateDiscount = () => {
     let template = createTemplate()
 
     let form = document.createElement("form")
+    form.classList = "outputForm"
 
     let label = document.createElement("label")
     label.innerHTML = "Valor do veículo"
@@ -280,6 +283,7 @@ const showMonthName = () => {
     let results = document.createElement("div")
 
     let form = document.createElement("form")
+    form.classList = "outputForm"
     let monthLabel = document.createElement("label")
     monthLabel.innerHTML = "Digite um número de 1 a 12"
     let monthInput = document.createElement("input")
@@ -364,6 +368,7 @@ const salaryCalculator = () => {
     let results = document.createElement("div")
     
     let form = document.createElement("form")
+    form.classList = "outputForm"
 
     let nameLabel = document.createElement("label")
     nameLabel.innerHTML = "Nome:"
@@ -468,6 +473,7 @@ const calculator = () => {
     let results = document.createElement("div")
 
     let form = document.createElement("form")
+    form.classList = "outputForm"
 
     let firstNumberLabel = document.createElement("label")
     firstNumberLabel.innerHTML = "Primeiro número:"
@@ -528,7 +534,7 @@ const calculator = () => {
             break;
 
             default:
-            p.innerHTML = "Valor inválido inserido"
+            p.innerHTML = "Operador inválido inserido"
             
         }
 
@@ -541,7 +547,244 @@ const calculator = () => {
 }
 
 const triangles = () => {
+    resetResults()
+    let display = document.getElementById("display")
+    let template = createTemplate()
 
+    let results = document.createElement("div")
+
+    let form = document.createElement("form")
+    form.classList = "outputForm"
+
+    let firstSideLabel = document.createElement("label")
+    firstSideLabel.innerHTML = "Lado A:"
+
+    let firstSideInput = document.createElement("input")
+    firstSideInput.type = "number"
+    firstSideInput.step = "any"
+
+    firstSideLabel.append(firstSideInput)
+
+    let secondSideLabel = document.createElement("label")
+    secondSideLabel.innerHTML = "Lado B:"
+
+    let secondSideInput = document.createElement("input")
+    secondSideInput.type = "number"
+    secondSideInput.step = "any"
+
+    secondSideLabel.append(secondSideInput)
+
+    let thirdSideLabel = document.createElement("label")
+    thirdSideLabel.innerHTML = "Lado C:"
+
+    let thirdSideInput = document.createElement("input")
+    thirdSideInput.type = "number"
+    thirdSideInput.step = "any"
+
+    thirdSideLabel.append(thirdSideInput)
+
+    let btn = document.createElement("button")
+    btn.classList = "formBtn"
+    btn.innerHTML = "Calcular"
+    btn.addEventListener("click", (event) => {
+
+        event.preventDefault()
+
+        let firstSideValue = Number(firstSideInput.value)
+        let secondSideValue = Number(secondSideInput.value)
+        let thirdSideValue = Number(thirdSideInput.value)
+
+        if(firstSideValue <= 0 || secondSideValue <= 0 || thirdSideValue <= 0){
+            results.innerHTML = "Valor inválido detectado"
+        }else if(firstSideValue > secondSideValue + thirdSideValue || secondSideValue > firstSideValue + thirdSideValue || thirdSideValue > firstSideValue + secondSideValue){
+            results.innerHTML = "Valores fornecidos violam regra da desigualdade triângular"
+        }else if(firstSideValue == secondSideValue && secondSideValue == thirdSideValue){
+            results.innerHTML = "Valores fornecidos formam um triângulo equilatero"
+        }else if(firstSideValue == secondSideValue || firstSideValue == thirdSideValue || secondSideValue == thirdSideValue){
+            results.innerHTML = "Valores fornecidos formam um triângulo isósceles"
+        }else if(firstSideValue != secondSideValue && firstSideValue != thirdSideValue && secondSideValue != thirdSideValue){
+            results.innerHTML = "Valores fornecidos formam um triângulo escaleno"
+        }
+    })
+
+    form.append(firstSideLabel, secondSideLabel, thirdSideLabel, btn)
+
+    template.append(form, results)
+
+    display.append(template)
+}
+
+const teacherEarnings = () => {
+    resetResults()
+    const display = document.getElementById("display")
+
+    const template = createTemplate()
+
+    let results = document.createElement("div")
+
+    let form = document.createElement("form")
+    form.classList = "outputForm"
+    
+    let hoursPerMonthLabel = document.createElement("label")
+    hoursPerMonthLabel.innerHTML = "horas/mês"
+
+    let hoursPerMonthInput = document.createElement("input")
+    hoursPerMonthInput.type = "number"
+    hoursPerMonthInput.min = 0
+
+    hoursPerMonthLabel.append(hoursPerMonthInput)
+
+    let teacherLevelLabel = document.createElement("label")
+    teacherLevelLabel.innerHTML = "Nível:"
+
+    let teacherLevel = document.createElement("select")
+
+    let level1 = document.createElement("option")
+    level1.value = 12
+    level1.innerHTML = "Nível 1"
+
+    let level2 = document.createElement("option")
+    level2.value = 17
+    level2.innerHTML = "Nível 2"
+
+    let level3 = document.createElement("option")
+    level3.value = 25
+    level3.innerHTML = "Nível 3"
+
+    teacherLevel.append(level1, level2, level3)
+
+    teacherLevelLabel.append(teacherLevel)
+
+    let btn = document.createElement("button")
+    btn.innerHTML = "Calcular"
+    btn.classList = "formBtn"
+    btn.addEventListener("click", (e) => {
+
+        e.preventDefault()
+        
+        let teacherRate = teacherLevel.value
+        let monthlySalary = Number(hoursPerMonthInput.value) * teacherRate
+
+        results.innerHTML = `Salário mensal: R$ ${monthlySalary.toFixed(2)}`
+    })
+
+    form.append(hoursPerMonthLabel, teacherLevelLabel, btn)
+
+    template.append(form, results)
+
+    display.append(template)
+
+}
+
+const swimCategory = () => {
+    resetResults()
+
+    let display = document.getElementById("display")
+
+    let template = createTemplate()
+
+    let results = document.createElement("div")
+
+    let form = document.createElement("form")
+    form.classList = "outputForm"
+
+    let ageLabel = document.createElement("label")
+    ageLabel.innerHTML = "Idade:"
+
+    let ageInput = document.createElement("input")
+    ageInput.type = "number"
+    ageInput.min = 0
+
+    ageLabel.append(ageInput)
+
+    let btn = document.createElement("button")
+    btn.classList = "formBtn"
+    btn.innerHTML = "Categoria"
+    btn.addEventListener("click", (e) => {
+        e.preventDefault()
+
+        let age = Number(ageInput.value)
+        if(age < 5){
+            results.innerHTML = "Idade mínima não atingida"
+        }else if(age >=5 && age <=7){
+            results.innerHTML = "Categoria Infantil A"
+        }else if(age > 7 && age <= 10){
+            results.innerHTML = "Categoria Infantil B"
+        }else if(age > 10 && age <= 13){
+            results.innerHTML = "Categoria Juvenil A"
+        }else if(age > 13 && age <= 17){
+            results.innerHTML ="Categoria Juvenil B"
+        }else{
+            results.innerHTML = "Categoria Sênior"
+        }
+    })
+
+    form.append(ageLabel, btn)
+
+    template.append(form, results)
+
+    display.append(template)
+}
+
+const energyBill = () => {
+    resetResults()
+
+    let template = createTemplate()
+
+    let display = document.getElementById("display")
+
+    let results = document.createElement("div")
+
+    let form = document.createElement("form")
+    form.classList = "outputForm"
+
+    let energyLabel = document.createElement("label")
+    energyLabel.innerHTML = "Consumo no mês:"
+
+    let energyInput = document.createElement("input")
+    energyInput.type = "number"
+    energyInput.step = "any"
+    energyInput.min = 0
+
+    energyLabel.append(energyInput)
+
+    let clientTypeLabel = document.createElement("label")
+    clientTypeLabel.innerHTML = "Tipo de consumo:"
+
+    let clientType = document.createElement("select")
+
+    let optionResidence = document.createElement("option")
+    optionResidence.innerHTML = "Residência"
+    optionResidence.value = 0.6
+
+    let optionComercial = document.createElement("option")
+    optionComercial.innerHTML = "Comercial"
+    optionResidence.value = 0.48
+
+    let optionIndustrial = document.createElement("option")
+    optionIndustrial.innerHTML = "Industrial"
+    optionIndustrial.value = 1.29
+
+    clientType.append(optionResidence, optionComercial, optionIndustrial)
+
+    clientTypeLabel.append(clientType)
+
+    let btn = document.createElement("button")
+    btn.innerHTML = "Calcular"
+    btn.classList = "formBtn"
+    btn.addEventListener("click" , (e) => {
+        e.preventDefault()
+
+        let finalValue = Number(energyInput.value) * Number(clientType.value)
+        console.log(finalValue)
+        results.innerHTML = `Valor final: R$ ${finalValue.toFixed(2)}`
+    })
+
+    form.append(energyLabel, clientTypeLabel, btn)
+
+    template.append(form, results)
+
+    display.append(template)
 }
 
 const addEventListeners = () => {
@@ -589,14 +832,26 @@ const addEventListeners = () => {
     btn32.addEventListener("click", () => {
         calculator()
     })
+
+    const btn33 = document.getElementById("33")
+    btn33.addEventListener("click", () => {
+        triangles()
+    })
+
+    const btn34 = document.getElementById("34")
+    btn34.addEventListener("click", () => {
+        teacherEarnings()
+    })
+
+    const btn35 = document.getElementById("35")
+    btn35.addEventListener("click", () => {
+        swimCategory()
+    })
+
+    const btn36 = document.getElementById("36")
+    btn36.addEventListener("click", () => {
+        energyBill()
+    })
 }
 
 addEventListeners()
-
-function ex24(){
-    let display = document.getElementById("display")
-
-    let form = document.createElement("form")
-
-    
-}
