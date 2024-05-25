@@ -787,6 +787,112 @@ const energyBill = () => {
     display.append(template)
 }
 
+const idealWeight = () => {
+    resetResults()
+
+    let display = document. getElementById("display")
+
+    let template = createTemplate()
+
+    let form = document.createElement("form")
+    form.classList = "outputForm"
+
+    let results = document.createElement("div")
+    
+    let nameLabel = document.createElement("label")
+    nameLabel.innerHTML = "Nome:"
+
+    let nameInput = document.createElement("input")
+
+    nameLabel.append(nameInput)
+
+    let genderLabel = document.createElement("label")
+    genderLabel.innerHTML = "Gênero:"
+
+    let genderSelect = document.createElement("select")
+
+    let optionM = document.createElement("option")
+    optionM.innerHTML = "Masculino"
+    optionM.value = "M"
+
+    let optionF = document.createElement("option")
+    optionF.innerHTML = "Feminino"
+    optionF.value = "F"
+
+    let optionPlaceholder = document.createElement("option")
+    optionPlaceholder.innerHTML = "Selecione um"
+    optionPlaceholder.value = ""
+
+    genderSelect.append(optionPlaceholder, optionF, optionM)
+    genderLabel.append(genderSelect)
+
+    let heightLabel = document.createElement("label")
+    heightLabel.innerHTML = "Altura:"
+
+    let heightInput = document.createElement("input")
+    heightInput.type = "number"
+    heightInput.step = "any"
+
+    heightLabel.append(heightInput)
+
+    let ageLabel = document.createElement("label")
+    ageLabel.innerHTML = "Idade:"
+
+    let ageInput = document.createElement("input")
+    ageInput.type = "number"
+    
+    ageLabel.append(ageInput)
+
+    let btn = document.createElement("button")
+    btn.classList = "formBtn"
+    btn.innerHTML = "Calcular"
+    btn.addEventListener("click", (e) => {
+        e.preventDefault()
+
+        let name = nameInput.value
+        let height = Number(heightInput.value.replace(",", "."))
+        let age = Number(ageInput.value)
+        let gender = genderSelect.value
+        let idealWeight = 0
+
+        console.log(name,height,age,gender)
+
+        if(gender == "M" && height > 1.7 && age <= 20){
+            idealWeight = (72.7 * height) - 58
+            console.log(idealWeight) 
+        }else if (gender == "M" && height > 1.7 && age >= 21 && age <= 39){
+            idealWeight = (72.7 * height) - 53
+            console.log(idealWeight)
+        }else if (gender == "M" && height > 1.7 && age >= 40){
+            idealWeight = (72.7 * height) - 45
+            console.log(idealWeight)
+        }else if (gender == "M" && height <= 1.7 && age <= 40){
+            idealWeight = (72.7 * height) - 50
+            console.log(idealWeight)
+        }else if( gender == "M" && height <= 1.7 && age > 40){
+            idealWeight = (72.7 * height) - 58
+            console.log(idealWeight)
+        }else if(gender == "F" && height > 1.5){
+            idealWeight = (72.7 * height) - 44.7
+            console.log(idealWeight)
+        }else if( gender == "F" && height <= 1.5 && age >= 35){
+            idealWeight = (72.7 * height) - 45
+            console.log(idealWeight)
+        }else if (gender == "F" && height <= 1.5 && age < 35){
+            idealWeight = (72.7 * height) - 49
+            console.log(idealWeight)
+        }
+
+        results.innerHTML = `Peso ideal: ${idealWeight.toFixed(2)}`
+    })
+
+    form.append(nameLabel, heightLabel, genderLabel, ageLabel, btn)
+    template.append(form,results)
+    display.append(template)
+}
+
+idealWeight()
+
 const addEventListeners = () => {
     const btn24 = document.getElementById("24")
     btn24.addEventListener("click", () => {
