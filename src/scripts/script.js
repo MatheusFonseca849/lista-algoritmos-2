@@ -891,8 +891,6 @@ const idealWeight = () => {
     display.append(template)
 }
 
-idealWeight()
-
 const addEventListeners = () => {
     const btn24 = document.getElementById("24")
     btn24.addEventListener("click", () => {
@@ -957,6 +955,11 @@ const addEventListeners = () => {
     const btn36 = document.getElementById("36")
     btn36.addEventListener("click", () => {
         energyBill()
+    })
+
+    const btn37 = document.getElementById("37")
+    btn37.addEventListener("click", () => {
+        idealWeight()
     })
 }
 
