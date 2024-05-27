@@ -129,6 +129,20 @@ section button {
     gap: 16px;
 }
 
+.outputForm input, select{
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid grey;
+}
+
+.outputForm label{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+
+
 .formBtn {
     position: static;
 }

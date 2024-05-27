@@ -201,6 +201,7 @@ const wageRaise = () => {
     let employeeList = document.createElement("div")
 
     const form = document.createElement("form")
+    form.classList = "outputForm"
 
     const nameLabel = document.createElement("label")
     nameLabel.innerHTML = "Nome:"
@@ -265,7 +266,7 @@ const wageRaise = () => {
         let difference = finalPayroll - previousPayroll
         
         let p = document.createElement("p")
-        p.innerHTML = `O acrécimo à folha de pagamento é de R$ ${difference.toFixed(2)}`
+        p.innerHTML = `O acréscimo à folha de pagamento é de R$ ${difference.toFixed(2)}`
         output.append(p)
     })
 
