@@ -169,15 +169,15 @@ const calculateDiscount = () => {
 
         switch(select.value){
             case "gas":
-            results.innerHTML = Number(valueInput.value) * 0.79
+            results.innerHTML = `R$ ${Number(valueInput.value) * 0.79}`
             break;
 
             case "alcohol":
-            results.innerHTML = Number(valueInput.value) * 0.75
+            results.innerHTML = `R$ ${Number(valueInput.value) * 0.75}`
             break;
 
             case "diesel":
-            results.innerHTML = Number(valueInput.value) * 0.86
+            results.innerHTML = `R$ ${Number(valueInput.value) * 0.86}`
         }
     })
 
@@ -961,6 +961,11 @@ const addEventListeners = () => {
     const btn37 = document.getElementById("37")
     btn37.addEventListener("click", () => {
         idealWeight()
+    })
+
+    const clearBtn = document.getElementById("clear")
+    clearBtn.addEventListener("click", () => {
+        resetResults()
     })
 }
 
